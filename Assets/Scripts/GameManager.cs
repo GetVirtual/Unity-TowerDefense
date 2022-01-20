@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] CharacterController _charactercontroller;
+    [SerializeField] private CharacterController _charactercontroller;
+    
 
     private void ButtonTest()
     {
