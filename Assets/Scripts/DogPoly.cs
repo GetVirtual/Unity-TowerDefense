@@ -13,15 +13,31 @@ public class DogPoly : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         TargetPosition = gameObject.transform.position;
     }
-    private void OnMouseEnter()
+    //private void OnMouseEnter()
+    //{
+    //    TargetPosition = gameObject.transform.position + (gameObject.transform.forward * RunDistance);
+    //    GetComponent<Animator>().Play("WalkForwardBattle");
+    //}
+
+    private void OnGUI()
     {
-        TargetPosition = gameObject.transform.position + (gameObject.transform.forward * RunDistance);
+        if(GUI.Button(new Rect(10,10, 100, 20), "Run"))
+        {
+            TargetPosition = gameObject.transform.position + (gameObject.transform.forward * RunDistance);
+            GetComponent<Animator>().Play("WalkForwardBattle");
+        }
     }
 
     private void Update()
-    {
-       var delta = TargetPosition - gameObject.transform.position;  
-       if(delta.magnitude > 0.1)
-        characterController.Move(gameObject.transform.forward * RunSpeed * Time.deltaTime);
+    {      
+        var delta = TargetPosition - gameObject.transform.position;
+        if (delta.magnitude > 0.1)
+        {
+            gameObject.transform.position = gameObject.transform.position + (gameObject.transform.forward * RunSpeed * Time.deltaTime);
+        }
+        else
+        {
+            GetComponent<Animator>().Play("Idle_Battle");
+        }
     }
 }
