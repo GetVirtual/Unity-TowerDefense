@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class DogPoly : MonoBehaviour
 {
-    private CharacterController characterController;
-    
-
-    private void OnMouseEnter()
+    public float RunSpeed = 5;
+    public float RunDistance = 5;
+    private CharacterController characterController;    
+    private Vector3 TargetPosition;
+    private void Start()
     {
         characterController = GetComponent<CharacterController>();
-        characterController.Move(new Vector3(-5,0,0));
-        
-
+        TargetPosition = gameObject.transform.position;
+    }
+    private void OnMouseEnter()
+    {
+        TargetPosition = gameObject.transform.position + (gameObject.transform.forward * RunDistance);
     }
 
-    //private void OnMouseExit()
-    //{
-    //    characterController = GetComponent<CharacterController>();
-    //    characterController.Move(new Vector3(0, 0, 0));
-    //}
+    private void Update()
+    {
+       var delta = TargetPosition - gameObject.transform.position;  
+       if(delta.magnitude > 0.1)
+        characterController.Move(gameObject.transform.forward * RunSpeed * Time.deltaTime);
+    }
 }
