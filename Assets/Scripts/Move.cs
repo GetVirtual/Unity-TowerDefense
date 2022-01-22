@@ -17,7 +17,8 @@ public class Move : MonoBehaviour
         animator = GetComponent<Animator>();
         
         agent.destination = goal.position;
-        
+        animator.Play("WalkForwardBattle");
+
     }
 
     private void Update()
@@ -25,7 +26,7 @@ public class Move : MonoBehaviour
 
         if (agent.remainingDistance > 0)
         {
-            animator.Play("WalkForwardBattle");
+            //animator.Play("WalkForwardBattle");
             // animation zu ende spielen lassen?
         }
 

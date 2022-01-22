@@ -1833,6 +1833,7 @@ GameObject:
   - component: {fileID: 2037795243793326453}
   - component: {fileID: 2037795243135539752}
   - component: {fileID: 2037795243135539753}
+  - component: {fileID: 6485611075485853911}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -1930,6 +1931,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 0}
+--- !u!114 &6485611075485853911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65483250200256828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cc79307a09948488db166b326f8784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hitpoints: 10
 --- !u!1 &65483250200256830
 GameObject:
   m_ObjectHideFlags: 0
