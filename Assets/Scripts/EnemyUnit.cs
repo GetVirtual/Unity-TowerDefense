@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.AI;
 
 public class EnemyUnit : MonoBehaviour
 {
@@ -20,8 +21,9 @@ public class EnemyUnit : MonoBehaviour
         Hitpoints -= amount;
         if(Hitpoints <= 0)
         {
-            GetComponent<Animator>().Play("GetHit");
-            Destroy(gameObject, 1.0f);
+            GetComponent<Animator>().Play("Die");
+            GetComponent<NavMeshAgent>().isStopped = true;
+            Destroy(gameObject, 5.0f);
         }
     }
 
