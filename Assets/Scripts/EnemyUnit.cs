@@ -12,7 +12,7 @@ public class EnemyUnit : MonoBehaviour
     public static void TestHit(MenuCommand command)
     {
         var unit = (EnemyUnit)command.context;
-        (unit).DoDamage(unit.Hitpoints);
+        (unit).DoDamage(9.0f);
     }
 
     public void DoDamage(float amount)
@@ -21,10 +21,21 @@ public class EnemyUnit : MonoBehaviour
         Hitpoints -= amount;
         if(Hitpoints <= 0)
         {
-            GetComponent<Animator>().Play("Die");
+            GetComponent<Animator>().CrossFade("Die", 0.2f);
             GetComponent<NavMeshAgent>().isStopped = true;
             Destroy(gameObject, 5.0f);
         }
+        else
+        {
+            StartCoroutine(nameof(HandleHitAnimation));
+        }
+    }
+
+    private IEnumerator HandleHitAnimation()
+    {
+        GetComponent<NavMeshAgent>().isStopped = true;
+        yield return new WaitForSeconds(2f);
+        GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     // Start is called before the first frame update
