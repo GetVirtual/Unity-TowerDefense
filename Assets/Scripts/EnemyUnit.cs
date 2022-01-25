@@ -15,13 +15,18 @@ public class EnemyUnit : MonoBehaviour
         (unit).DoDamage(9.0f);
     }
 
+    public bool IsAlive => Hitpoints > 0;
+
     public void DoDamage(float amount)
     {
-        GetComponent<Animator>().Play("GetHit");
+        if (!IsAlive)
+            return;
+        var animator = GetComponent<Animator>();
+        animator.Play("GetHit");
         Hitpoints -= amount;
         if(Hitpoints <= 0)
         {
-            GetComponent<Animator>().CrossFade("Die", 0.2f);
+            animator.CrossFade("Die", 0.2f);
             GetComponent<NavMeshAgent>().isStopped = true;
             Destroy(gameObject, 5.0f);
         }
@@ -35,7 +40,8 @@ public class EnemyUnit : MonoBehaviour
     {
         GetComponent<NavMeshAgent>().isStopped = true;
         yield return new WaitForSeconds(2f);
-        GetComponent<NavMeshAgent>().isStopped = false;
+        if (IsAlive)
+            GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     // Start is called before the first frame update
